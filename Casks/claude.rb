@@ -1,6 +1,8 @@
 cask "claude" do
   releases_json = JSON.parse(`curl -sf https://downloads.claude.ai/releases/darwin/universal/RELEASES.json`.strip)
-  latest = releases_json["releases"].last["updateTo"]
+  current_release = releases_json["currentRelease"]
+  matching_release = releases_json["releases"].find { |release| release["version"] == current_release }
+  latest = (matching_release || releases_json["releases"].last)["updateTo"]
   resolved_url = latest["url"]
 
   version :latest
