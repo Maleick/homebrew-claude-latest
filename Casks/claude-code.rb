@@ -5,7 +5,7 @@ cask "claude-code" do
   gcs = "https://storage.googleapis.com/claude-code-dist-86c565f3-f756-42ad-8dfa-d59b1c096819/claude-code-releases"
   resolved = `curl -sf #{gcs}/latest`.strip
 
-  version :latest
+  version resolved
   sha256 :no_check
 
   url "#{gcs}/#{resolved}/#{os}-#{arch}/claude",
